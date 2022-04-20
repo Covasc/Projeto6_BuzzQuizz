@@ -144,3 +144,9 @@ ul li:first-child{
     font-weight: 300;
     line-height: 22px;
 }
+
+/* class to be add when no user's quizzes were found */
+.no-quizz {
+    border: 1px dashed #D4D4D4;
+    border-radius: 5px;
+}
