@@ -7,6 +7,10 @@ strong{
     font-weight: bold;
 }
 
+div.hidden{
+    display: none;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -18,6 +22,7 @@ strong{
 .pages{
     width: 1052px;
     margin: 139px 0 0 0;
+    position: relative;
 }
 
 .top-bar {
@@ -79,8 +84,6 @@ strong{
     justify-content: start;
 }
 
-
-
 .list-quizzes ul {
     width: 100%;
     justify-content: space-between;
@@ -95,7 +98,6 @@ ul li:first-child{
     margin-right: 16px;
 }
 
-
 .quizz{
     margin-bottom: 12px;
     display: flex;
@@ -107,7 +109,6 @@ ul li:first-child{
 .gradient-overlay {
     width: 100%;
     position: relative;
-
 }
 
 .gradient-overlay::after{
@@ -147,6 +148,30 @@ ul li:first-child{
 
 /* class to be add when no user's quizzes were found */
 .no-quizz {
+    height: 181px;
+    background: #fafafa;
     border: 1px dashed #D4D4D4;
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 77px;
+}
+
+.no-quizz span{
+    width: 250px;
+    font-size: 20px;
+    color: #B9B9B9;
+    text-align: center;
+    margin: 17px;
+}
+
+.no-quizz button{
+    width: 136px;
+    height: 40px;
+    border: 1px dashed #EC362D;
+    color: #EC362D;
+    font-size: 21px;
+    border-radius: 50px;
 }
