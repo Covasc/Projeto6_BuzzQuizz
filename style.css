@@ -23,11 +23,31 @@ strong{
     margin-bottom: 12px;
     font-weight: bold;
     font-size: 20px;
+    display: flex;
+    align-items: center;
 }
 
-/* HOME PAGE */
+/* User */
 
-.all-quizzes-container{
+.add-button{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.add-button ion-icon{
+    color: white;
+    font-size: 26px;
+}
+
+/* List quizzes */
+
+.list-quizzes-container{
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -39,12 +59,22 @@ strong{
     justify-content: start;
 }
 
-.all-quizzes ul {
+
+
+.list-quizzes ul {
     width: 100%;
     justify-content: space-between;
     display: flex;
     flex-wrap: wrap;
 }
+
+ul li:nth-child(2){
+    margin-right: auto;
+}
+ul li:first-child{
+    margin-right: 16px;
+}
+
 
 .quizz{
     margin-bottom: 12px;
