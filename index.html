@@ -20,15 +20,15 @@
             <h1>BuzzQuizz</h1>
         </div>
         <div class="pages">
-            <div class="page home">
+            <div class="page home active">
                 <div class="no-quizz">
                     <span>Você não criou nenhum quizz ainda :(</span>
-                    <button>Criar Quizz</button>
+                    <button type="button" onclick="screenChange('create-quizz')">Criar Quizz</button>
                 </div>
                 <div class="list-quizzes-container hidden">
                     <div class="section-title">
                         <span>Seus Quizzes</span>
-                        <div class="add-button">
+                        <div class="add-button" onclick="screenChange('create-quizz')">
                             <ion-icon name="add-sharp"></ion-icon>
                         </div>
                     </div>
@@ -106,7 +106,7 @@
                 </div>
             </div>
             <div class="page create-quizz">
-
+                
             </div>
             <div class="page quizz">
 
@@ -117,7 +117,7 @@
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="scripts.js"></script>
+    <script src="script.js"></script>
 </body>
 
 </html>
