@@ -1,6 +1,7 @@
 body{
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
+    background-color: #fafafa;
 }
 
 strong{
@@ -26,6 +27,7 @@ div.hidden{
 }
 
 .page{
+    visibility: hidden;
     position: absolute;
     top: 0; left: 0;
     opacity: 0;
@@ -34,6 +36,8 @@ div.hidden{
 }
 
 .page.active{
+    visibility: visible;
+    width: 100%;
     opacity: 1;
     height: auto;
 }
@@ -187,4 +191,43 @@ ul li:first-child{
     color: #EC362D;
     font-size: 21px;
     border-radius: 50px;
+}
+
+/* CREATE QUIZZ FORM */
+
+.create-quizz-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.create-quizz-container > span{
+    font-size: 23px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.form-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 600px;
+    background-color: white;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.05));
+    padding: 24px 0;
+}
+
+.form-container input{
+    width: 90%;
+    height: 46px;
+    border-radius: 5px;
+    border: 1px solid rgb(209, 209, 209);
+    margin-bottom: 9px;
+}
+
+.create-quizz-container button{
+    color: rgba(255, 245, 244, 1);
+    background-color: #EC362D;
+    border-radius: 15px;
 }
