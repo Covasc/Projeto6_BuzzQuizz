@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 body{
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
@@ -12,12 +16,13 @@ strong{
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 100vh;
+    background-color: #E5E5E5;
 }
 
 .pages{
     width: 1052px;
     margin: 139px 0 0 0;
+    position: relative;
 }
 
 .top-bar {
@@ -88,10 +93,10 @@ strong{
     flex-wrap: wrap;
 }
 
-ul li:nth-child(2){
+.home ul li:nth-child(2){
     margin-right: auto;
 }
-ul li:first-child{
+.home ul li:first-child{
     margin-right: 16px;
 }
 
@@ -149,4 +154,103 @@ ul li:first-child{
 .no-quizz {
     border: 1px dashed #D4D4D4;
     border-radius: 5px;
+}
+
+/* Quizz navigation */
+.quizz-done {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.introduction {
+    width: 100%;
+    height: 227px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.57), rgba(0, 0, 0, 0.57)), url(Images/imagem-teste.jpg);
+    background-size: cover;
+    margin-bottom: 42px;
+    overflow: hidden;
+}
+.intro-name {
+    position: absolute;
+    color: white;
+    font-size: 39px;
+    font-weight: 400;
+}
+.content {
+    width: 759px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.question-area {
+    padding: 30px;
+    background-color: white;
+    margin-bottom: 42px;
+}
+.content ul {
+    width: 100%;
+}
+.questions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.questions > div:nth-child(1) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 138px;
+    font-size: 23px;
+    font-weight: 700;
+    color: white;
+    background-color: #434CA0;
+    text-align: center;
+    padding: 0 30px;
+    margin-bottom: 21px;
+}
+.questions > div:nth-child(2) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    font-weight: 700;
+    font-size: 20px;
+}
+.top-answer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+.top-answer > div {
+    width: 329px;
+}
+.top-answer > div img {
+    width: 329px;
+    height: 175px;
+    object-fit: cover;
+}
+.bottom-answer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.bottom-answer > div {
+    width: 329px;
+}
+.bottom-answer > div img {
+    width: 329px;
+    height: 175px;
+    object-fit: cover;
 }
