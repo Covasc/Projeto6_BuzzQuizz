@@ -3,7 +3,6 @@
 }
 
 body{
-    box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
     background-color: #FAFAFA;}
 
@@ -23,12 +22,16 @@ div.hidden{
 }
 
 .pages{
-    width: 1052px;
+    width: 100%;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.pages > div:nth-child(1) {
+.pages > div:nth-child(-n+2).active {
     margin: 139px 0 0 0;
+    max-width: 1052px;
 }
 .pages > div:nth-child(3) {
     margin: 69px 0 0 0;
@@ -36,10 +39,10 @@ div.hidden{
 
 .page{
     visibility: hidden;
-    position: absolute;
     top: 0; left: 0;
     opacity: 0;
     height: 0;
+    margin: 0;
     transition: opacity 0.5s ease-in-out;
 }
 
@@ -203,16 +206,17 @@ div.hidden{
 
 /* CREATE QUIZZ FORM */
 
-.create-quizz-container{
+.create-quizz-container > div{
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.create-quizz-container > span{
+.create-quizz-container > div > span{
     font-size: 23px;
     font-weight: bold;
     text-align: center;
+    margin-bottom: 17px;
 }
 
 .form-container{
@@ -224,6 +228,7 @@ div.hidden{
     background-color: white;
     filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.05));
     padding: 24px 0;
+    margin-bottom: 85px;
 }
 
 .form-container input{
@@ -235,6 +240,10 @@ div.hidden{
 }
 
 .create-quizz-container button{
+    border: none;
+    width: 368.86px;
+    height: 54px;
+    font-size: 21px;
     color: rgba(255, 245, 244, 1);
     background-color: #EC362D;
     border-radius: 15px;
