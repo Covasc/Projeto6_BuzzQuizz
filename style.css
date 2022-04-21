@@ -5,8 +5,7 @@
 body{
     box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
-    background-color: #fafafa;
-}
+    background-color: #FAFAFA;}
 
 strong{
     font-weight: bold;
@@ -21,13 +20,18 @@ div.hidden{
     flex-direction: column;
     align-items: center;
     width: 100%;
-    background-color: #E5E5E5;
 }
 
 .pages{
     width: 1052px;
-    margin: 139px 0 0 0;
     position: relative;
+}
+
+.pages > div:nth-child(1) {
+    margin: 139px 0 0 0;
+}
+.pages > div:nth-child(3) {
+    margin: 69px 0 0 0;
 }
 
 .page{

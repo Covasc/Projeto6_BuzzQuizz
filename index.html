@@ -9,9 +9,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -21,8 +19,13 @@
         </div>
         <div class="pages">
             <div class="page home">
-                <div class="list-quizzes-container">
-                    <div class="section-title hidden">
+                <div class="no-quizz ">
+                    
+                    <span>Você não criou nenhum quizz ainda :(</span>
+                    <button type="button" onclick="screenChange('create-quizz')">Criar Quizz</button>
+                </div>
+                <div class="list-quizzes-container hidden">
+                    <div class="section-title">
                         <span>Seus Quizzes</span>
                         <div class="add-button">
                             <ion-icon name="add-sharp"></ion-icon>
@@ -103,7 +106,7 @@
             <div class="page create-quizz">
 
             </div>
-            <div class="page quizz-done">
+            <div class="page quizz-done active">
                 <div class="introduction">
                     <div class="intro-name">
                         <span>O quão Potterhead é você?</span>
