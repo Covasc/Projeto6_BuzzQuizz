@@ -6,7 +6,7 @@ body{
     font-family: 'Roboto', sans-serif;
     background-color: #FAFAFA;}
 
-strong{
+strong,label{
     font-weight: bold;
 }
 
@@ -31,7 +31,7 @@ div.hidden{
 
 .pages > div:nth-child(-n+2).active {
     margin: 139px 0 0 0;
-    max-width: 1052px;
+    max-width: 1068px;
 }
 .pages > div:nth-child(3) {
     margin: 69px 0 0 0;
@@ -72,6 +72,7 @@ div.hidden{
 }
 
 .section-title{
+    margin-left: 8px;
     margin-bottom: 12px;
     font-weight: 700;
     font-size: 20px;
@@ -79,7 +80,7 @@ div.hidden{
     align-items: center;
 }
 
-/* User */
+/* ADD BUTTONS */
 
 .add-button{
     height: 30px;
@@ -114,19 +115,13 @@ div.hidden{
 
 .list-quizzes ul {
     width: 100%;
-    justify-content: space-between;
     display: flex;
     flex-wrap: wrap;
 }
 
-.home ul li:nth-child(2){
-    margin-right: auto;
-}
-.home ul li:first-child{
-    margin-right: 16px;
-}
-
 .quizz{
+    margin-left: 8px;
+    margin-right: 8px;
     margin-bottom: 12px;
     display: flex;
     width: 340px;
@@ -204,6 +199,23 @@ div.hidden{
     border-radius: 50px;
 }
 
+/* STEP TRANSITION */
+
+.step {
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+    transition-property: opacity, margin;
+    transition-duration: 0.3s;
+    transition-timing-function: ease-in-out;
+}
+
+.step.active{
+    opacity: 1;
+    visibility: visible;
+    height: auto;
+}
+
 /* CREATE QUIZZ FORM */
 
 .create-quizz-container > div{
@@ -220,26 +232,53 @@ div.hidden{
 }
 
 .form-container{
+    width: 600px;
+    background-color: white;
+    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.05));
+    margin-bottom: 85px;
+}
+
+.form-content {
+    padding:14px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    width: 600px;
-    background-color: white;
-    filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.05));
-    padding: 24px 0;
-    margin-bottom: 85px;
+}
+
+.question-top{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-content label{
+    width: 100%;
+    font-size: 20px;
 }
 
 .form-container input{
-    width: 90%;
+    width: 100%;
     height: 46px;
+    font-size: 19px;
     border-radius: 5px;
     border: 1px solid rgb(209, 209, 209);
-    margin-bottom: 9px;
+    padding: 0 15px;
 }
 
-.create-quizz-container button{
+.form-content label, .form-content input{
+    margin: 7px 0;
+}
+
+.form-container input::placeholder{
+    font-style: italic;
+    color: rgba(186, 186, 186, 1);
+    font-size: 19px;
+    line-height: 22px;
+}
+
+.step button{
     border: none;
     width: 368.86px;
     height: 54px;
@@ -247,6 +286,17 @@ div.hidden{
     color: rgba(255, 245, 244, 1);
     background-color: #EC362D;
     border-radius: 15px;
+}
+
+/* FORM OPEN/CLOSE TRANSITION */
+
+.form-container img {
+    opacity: 1;
+    transition: opacity 0.3s linear;
+}
+
+.form-container.active img{
+    opacity: 0;
 }
 
 /* Quizz navigation */

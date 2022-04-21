@@ -3,6 +3,11 @@ function qs(selector, parent = document) {
 }
 
 const screenChange = screen => {
-    qs('.active').classList.remove('active'); 
+    qs('.page.active').classList.remove('active'); 
     qs(`.${screen}`).classList.add('active');
+}
+
+const nextStep = step => {
+    qs('.step.active').classList.remove('active');
+    document.getElementById(`${step}`).classList.add('active');
 }
