@@ -10,4 +10,6 @@ const screenChange = screen => {
 const nextStep = step => {
     qs('.step.active').classList.remove('active');
     document.getElementById(`${step}`).classList.add('active');
+    const stepTop = qs('.pages');
+    stepTop.scrollIntoView({block: "start", behavior: "smooth"});
 }
