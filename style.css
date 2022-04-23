@@ -401,5 +401,7 @@ div.hidden{
 @media screen and (max-width: 1100px) {
     
 }
-
+.hide {
+    display: none;
+}
     
