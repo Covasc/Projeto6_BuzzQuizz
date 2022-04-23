@@ -33,15 +33,23 @@ const formValidation = (input) => {
     input.classList.add("error");
 }
 
+function isEmpty(arr){
+    return arr.every(element => element);
+}
+
+
 function createQuizzHandler() {
     const activeStep = qs(".step.active");
     const formData = activeStep.querySelectorAll(".form-content input");
+    const next = Number(activeStep.id) + 1;
     const validForm = [...formData].map(formValidation);
-    console.log(validForm);
-    if (validForm) {
+    console.log(validForm)
+    if (isEmpty(validForm)) {
         for (let x = 0; x < validForm.length; x++) {
             quizz.push(validForm[x]);
         }
-        nextStep(Number(activeStep.id) + 1);
+        nextStep(next);
+        return
     }
+    alert("Algo deu errado! Tente novamente!");
 }
