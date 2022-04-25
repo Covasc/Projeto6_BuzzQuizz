@@ -25,10 +25,65 @@ const createQuizz = object => axios.post(API + "/quizzes", object);
 
 const getQuizzes = () => axios.get(API + "/quizzes");
 
+const isURL = (url) => url.includes('http');
+
+
+
+
+function checkBasicData(input){
+    const charQty = input.value.length;
+    
+    if (input.name === "quizz-title"){
+        if (charQty < 20 || charQty > 65)
+            return false;
+        return true;
+    }
+    if (input.name === "qty-questions"){
+        if (Number(input.value) < 3)
+            return false;
+        return true;
+    }
+    if (input.name === "qty-levels"){
+        if (Number(input.value) < 2)
+            return false;
+        return true;
+    }
+    return isURL(input.value);  
+}
+
+
+
+function checkQuestionData(input){
+    const charQty = input.value.length;
+    let isHex = /^#[0-9a-f]{3}(?:[0-9a-f]{3})?$/i;
+    if(input.name === "question-text"){
+        if(charQty < 20)
+            return false;
+        return true;
+    }
+    if(input.name === "question-color"){
+        return isHex.test(input.value);
+    }
+    return isURL(input.value);
+}
+
 const formValidation = (input) => {
+    const parentId = input.parentElement.parentElement.parentElement.id;
+    let isValid = false;
     if (input.value !== "") {
         input.classList.remove("error");
-        return input.value;
+        if(parentId === "1"){
+            isValid = checkBasicData(input);
+        }
+        if (parentId === "2"){
+            isValid = checkQuestionData(input);
+        }
+        if (parentId === "3"){
+            isValid = checkLevelData(input)
+        }
+        if(isValid){
+            return input.value;
+        }       
     }
     input.classList.add("error");
 }
@@ -50,18 +105,18 @@ function createQuizzQuestionsInput (numberInput) {
                     <img src="./Images/edit-icon.svg" alt="">
                 </div>
                 <div class="textAreaInput hide">
-                    <input type="text" placeholder="Texto da pergunta">
-                    <input type="text" placeholder="Cor de fundo da pergunta">
+                    <input name="question-text" type="text" placeholder="Texto da pergunta">
+                    <input name="question-color" type="text" placeholder="Cor de fundo da pergunta">
                     <label for="question">Resposta correta</label>
                     <input type="text" placeholder="Resposta correta">
-                    <input type="text" placeholder="URL da imagem">
+                    <input name="url" type="text" placeholder="URL da imagem">
                     <label for="question">Respostas incorretas</label>
-                    <input type="text" placeholder="Resposta incorreta 1">
-                    <input type="text" placeholder="URL da imagem 1">
-                    <input type="text" placeholder="Resposta incorreta 2">
-                    <input type="text" placeholder="URL da imagem 2">
-                    <input type="text" placeholder="Resposta incorreta 3">
-                    <input type="text" placeholder="URL da imagem 3">       
+                    <input name="answer" type="text" placeholder="Resposta incorreta 1">
+                    <input name="url" type="text" placeholder="URL da imagem 1">
+                    <input name="answer" type="text" placeholder="Resposta incorreta 2">
+                    <input name="url" type="text" placeholder="URL da imagem 2">
+                    <input name="answer" type="text" placeholder="Resposta incorreta 3">
+                    <input name="url" type="text" placeholder="URL da imagem 3">       
                 </div>
             </div>
         </div>
