@@ -105,6 +105,7 @@ div.hidden{
     display: flex;
     flex-direction: column;
     margin-bottom: 47px;
+    overflow: hidden;
 }
 
 .section-title{
