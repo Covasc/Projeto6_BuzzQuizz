@@ -36,11 +36,11 @@ function isEmpty(arr){
     return arr.every(element => element);
 }
 
-function createQuizzQuestionsInput (numberInput) {
+function createQuizzQuestionsInput(numberInput) {
     inputQuizzData = document.querySelector(".addhere");
     inputQuizzData.innerHTML = "";
-    for (let i=0;i<numberInput;i++){
-        let questionNumber = i+1;
+    for (let i = 0; i < numberInput; i++) {
+        let questionNumber = i + 1;
         inputQuizzData.innerHTML += `
         <div onclick="openQuestionInput(this)" class="form-container questionNumber${questionNumber}">
             <div class="form-content">
@@ -66,18 +66,18 @@ function createQuizzQuestionsInput (numberInput) {
         </div>
         `;
     }
-    openQuestionInput (document.querySelector(".questionNumber1"));
+    openQuestionInput(document.querySelector(".questionNumber1"));
     console.log("foi");
 }
 
-function openQuestionInput (object) {
+function openQuestionInput(object) {
     let allTextAreas = document.querySelectorAll(".textAreaInput");
-    for (let i=0;i<allTextAreas.length;i++){
+    for (let i = 0; i < allTextAreas.length; i++) {
         allTextAreas[i].classList.add("hide");
     }
     let textAreaInput = object.querySelector(".textAreaInput");
     textAreaInput.classList.remove("hide");
-    object.querySelector(".question-top").scrollIntoView({ block: "center" , behavior: "smooth" });
+    object.querySelector(".question-top").scrollIntoView({ block: "center", behavior: "smooth" });
 }
 
 function createQuizzLevelInput (numberLevelsInput) {
