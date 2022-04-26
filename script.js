@@ -4,7 +4,18 @@ function qs(selector, parent = document) {
 
 const API = "https://mock-api.driven.com.br/api/v6/buzzquizz";
 let inputQuizzData = "";
+let inputQuizzLevel = "";
 let basicInfoQuizz = [];
+let score = 0;
+let listOfQuizzes = []
+
+//variáveis para criação:
+let quizzToSend = {title:"",image:"",questions:[],levels:[]};
+let questionsToSend = {};
+let numberQuestions = 0;
+let numberLevels = 0;
+
+getQuizzList();
 
 const screenChange = screen => {
     qs('.page.active').classList.remove('active');
@@ -21,73 +32,7 @@ const nextStep = step => {
     stepTop.scrollIntoView({ block: "start", behavior: "smooth" });
 }
 
-const createQuizz = object => axios.post(API + "/quizzes", object);
-
-const getQuizzes = () => axios.get(API + "/quizzes");
-
-const isURL = (url) => url.includes('http');
-
-function checkBasicData(input) {
-    const charQty = input.value.length;
-
-    if (input.name === "quizz-title") {
-        if (charQty < 20 || charQty > 65)
-            return false;
-        return true;
-    }
-    if (input.name === "qty-questions") {
-        if (Number(input.value) < 3)
-            return false;
-        return true;
-    }
-    if (input.name === "qty-levels") {
-        if (Number(input.value) < 2)
-            return false;
-        return true;
-    }
-    return isURL(input.value);
-}
-
-function checkQuestionData(input) {
-    const charQty = input.value.length;
-    let isHex = /^#[0-9a-f]{3}(?:[0-9a-f]{3})?$/i;
-    if (input.name === "question-text") {
-        if (charQty < 20)
-            return false;
-        return true;
-    }
-    if (input.name === "question-color") {
-        return isHex.test(input.value);
-    }
-    return isURL(input.value);
-}
-
-const formValidation = (input) => {
-    const parentId = input.parentElement.parentElement.parentElement.id;
-    let isValid = false;
-
-    if (input.value !== "") {
-        input.classList.remove("error");
-        if (parentId === "1") {
-            isValid = checkBasicData(input);
-        }
-        if (parentId === "2") {
-            isValid = checkQuestionData(input);
-        }
-        if (parentId === "3") {
-            isValid = checkLevelData(input)
-        }
-        if (isValid) {
-            return input.value;
-        }
-    }
-    if (input.name === "answer") {
-        return {answer: input.value};
-    }
-    input.classList.add("error");
-}
-
-function isEmpty(arr) {
+function isEmpty(arr){
     return arr.every(element => element);
 }
 
@@ -135,6 +80,209 @@ function openQuestionInput(object) {
     object.querySelector(".question-top").scrollIntoView({ block: "center", behavior: "smooth" });
 }
 
+function createQuizzLevelInput (numberLevelsInput) {
+    inputQuizzLevel = document.querySelector(".addLevelsHere");
+    inputQuizzData.innerHTML="";
+    for (let i=0;i<numberLevels;i++){
+        let levelsNumber = i+1;
+        inputQuizzLevel.innerHTML += `
+        <div onclick="openLevelInput(this)" class="form-container levelNumber${levelsNumber}">
+            <div class="form-content">
+                <div class="question-top">
+                    <label for="question">Nível ${levelsNumber}</label>
+                    <img src="./Images/edit-icon.svg" alt="">
+                </div>
+                <div class="textAreaLevelInput">
+                    <input type="text" placeholder="Título do nível">
+                    <input type="text" placeholder="% de acerto mínima">
+                    <input type="text" placeholder="URL da imagem do nível">
+                    <input type="text" placeholder="Descrição do nível">    
+                </div>
+            </div>
+        </div>
+        `;
+    }
+    openLevelInput (document.querySelector(".levelNumber1"));
+    console.log("foi");
+}
+
+function openLevelInput (object) {
+    let allLevelTextAreas = document.querySelectorAll(".textAreaLevelInput")
+    for (let i=0;i<allLevelTextAreas.length;i++){
+        allLevelTextAreas[i].classList.add("hide");
+    }
+    let textAreaLevelInput = object.querySelector(".textAreaLevelInput");
+    textAreaLevelInput.classList.remove("hide");
+    object.querySelector(".question-top").scrollIntoView({ block: "center" , behavior: "smooth" });
+}
+
+function isLesserThen10 (userInput) {
+    if (userInput.length >= 10) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function isLesserThen30 (userInput) {
+    if (userInput.length >= 30) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function verifyLevelInput () {
+    let numberOfZeros = 0;
+    for (let i=0;i<numberLevels;i++){
+        let num = i+1;
+        let levelToVerify = ".levelNumber" + num.toString();
+        let object = document.querySelector(`${levelToVerify}`);
+        let levelObject = {title:"",image:"",text:"",minValue:0}
+        levelObject.title = object.querySelector(".textAreaLevelInput").children[0].value;
+        if (isLesserThen10(levelObject.title)){
+            alert("Dados invalidos, verifique suas entradas");
+            console.log(1);
+            break;
+        }
+        levelObject.image = object.querySelector(".textAreaLevelInput").children[2].value;
+            if (isASiteAdress(levelObject.image)){
+            alert("Dados invalidos, verifique suas entradas");
+            console.log(2);
+            break;
+        }
+        levelObject.text = object.querySelector(".textAreaLevelInput").children[3].value;
+        if (isLesserThen30(levelObject.text)){
+            alert("Dados invalidos, verifique suas entradas");
+            console.log(3);
+            break;
+        }
+        levelObject.minValue = Number(object.querySelector(".textAreaLevelInput").children[1].value);
+        if (levelObject.minValue==0) {
+            numberOfZeros ++;
+        }
+        console.log(levelObject);
+        quizzToSend.levels[i] = levelObject;
+    }
+    if (numberOfZeros == 0) {
+        alert("Dados invalidos, verifique suas entradas");
+        console.log(4);
+        return
+    }
+    const activeStep = qs(".step.active");
+    const next = Number(activeStep.id) + 1;
+    nextStep(next);
+}
+
+function isASiteAdress (userInput) {
+    const correct = "https://";
+    let validation = false;
+    for (let i=0;i<correct.length;i++){
+        if (userInput[i]!==correct[i]) {
+            validation = true;
+        } else {
+        validation = false;
+        }
+    }
+    return validation;
+}
+
+function isNotAColor (userInput) {
+    if (userInput.length ==7 && userInput[0]=="#") {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function isLesserThen20 (userInput) {
+    if (userInput.length >= 20) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function verifyQuestionInput () {
+    for (let i = 0;i<numberQuestions;i++){
+        let num = i + 1;
+        let questionToVerify = ".questionNumber" + num.toString();
+        let object = document.querySelector(`${questionToVerify}`)
+        let questionObject = {title:"",color:"",answers:[]};
+        let questionObjectAnswers = {text:"",image:"",isCorrectAnswer: false}
+        questionObject.title = object.querySelector(".textAreaInput").children[0].value;
+        if (isLesserThen20(questionObject.title)) {
+            alert("Dados invalidos, verifique suas entradas");
+            console.log(1);
+            console.log(questionObject.title.length)
+            break;
+        }
+        let color = object.querySelector(".textAreaInput").children[1].value;
+        if (isNotAColor(color)) {
+            alert("Dados invalidos, verifique suas entradas");
+            console.log(2);
+            break;
+        }
+        questionObject.color = color;
+        questionObjectAnswers.text = object.querySelector(".textAreaInput").children[3].value;
+        if (questionObjectAnswers.text=="") {
+            alert("Dados invalidos, verifique suas entradas");
+            console.log(3);
+            break;
+        }
+        questionObjectAnswers.image = object.querySelector(".textAreaInput").children[4].value;
+        if (isASiteAdress(questionObjectAnswers.image)){
+            alert("Dados invalidos, verifique suas entradas");
+            console.log(4);
+            break;
+        }
+        questionObjectAnswers.isCorrectAnswer = true;
+        questionObject.answers[0]=questionObjectAnswers;
+        let questionObjectAnswers1 = {text:"",image:"",isCorrectAnswer: false}
+        questionObjectAnswers1.text = object.querySelector(".textAreaInput").children[6].value;
+        if (questionObjectAnswers1.text == ""){
+            alert("Dados invalidos, verifique suas entradas");
+            console.log(5);
+            break;
+        }
+        questionObjectAnswers1.image = object.querySelector(".textAreaInput").children[7].value;
+        if (isASiteAdress(questionObjectAnswers1.image)) {
+            alert("Dados invalidos, verifique suas entradas");
+            console.log(6);
+            break;
+        }
+        questionObject.answers[1]=questionObjectAnswers1;
+        if(object.querySelector(".textAreaInput").children[8].value!=""){
+            let questionObjectAnswers2 = {text:"",image:"",isCorrectAnswer: false}
+            questionObjectAnswers2.text = object.querySelector(".textAreaInput").children[8].value;
+            questionObjectAnswers2.image = object.querySelector(".textAreaInput").children[9].value;
+            if (isASiteAdress(questionObjectAnswers2.image)) {
+                alert("Dados invalidos, verifique suas entradas");
+                console.log(7);
+                break;
+            }    
+            questionObject.answers.push(questionObjectAnswers2);   
+        }
+        if(object.querySelector(".textAreaInput").children[10].value!=""){
+            let questionObjectAnswers3 = {text:"",image:"",isCorrectAnswer: false}
+            questionObjectAnswers3.text = object.querySelector(".textAreaInput").children[10].value;
+            questionObjectAnswers3.image = object.querySelector(".textAreaInput").children[11].value;
+            if (isASiteAdress(questionObjectAnswers3.image)) {
+                alert("Dados invalidos, verifique suas entradas");
+                console.log(8);
+                break;
+            }    
+            questionObject.answers.push(questionObjectAnswers3);    
+        }
+        console.log(questionObject);
+        quizzToSend.questions[i]=questionObject;
+    }
+    const activeStep = qs(".step.active");
+    const next = Number(activeStep.id) + 1;
+    nextStep(next);
+    createQuizzLevelInput(numberLevels);
+}
+
 function createQuizzHandler() {
     const activeStep = qs(".step.active");
     const formData = activeStep.querySelectorAll(".form-content input");
@@ -145,10 +293,69 @@ function createQuizzHandler() {
         for (let x = 0; x < validForm.length; x++) {
             basicInfoQuizz.push(validForm[x]);
         }
-        const numberQuestions = Number(basicInfoQuizz[2]);
+        numberQuestions = Number(basicInfoQuizz[2]);
+        quizzToSend.title = basicInfoQuizz[0];
+        quizzToSend.image = basicInfoQuizz[1];
+        numberLevels = Number(basicInfoQuizz[3]);
         createQuizzQuestionsInput(numberQuestions);
         nextStep(next);
         return
     }
     alert("Algo deu errado! Tente novamente!");
+}
+
+//codes for quizz solving - verificando cada pergunta do quizz
+
+function selectingOption (object) {
+    const quizzSection = object.closest(".questions");
+    if (quizzSection.classList.contains("done")){
+
+    } else {
+        const answers = quizzSection.querySelectorAll(".answers>div>div");
+        for (let i=0; i<answers.length; i++){
+            answers[i].classList.add("white");
+            if (answers[i].classList.contains("correct")){
+                answers[i].querySelector("span").classList.add("green");
+            } else {
+                answers[i].querySelector("span").classList.add("red");
+            }
+        }
+        object.classList.remove("white");
+        quizzSection.classList.add("done");
+        if (object.classList.contains("correct")){
+            score ++;
+        }
+    }
+}
+
+//buscando os quizzes do servidor 
+
+function getQuizzList () {
+    const requisicao = axios.get(`${API}/quizzes`);
+    requisicao.then(mountQuizzes);
+}
+
+function mountQuizzes (response) {
+    listOfQuizzes = [];
+    listOfQuizzes = response.data;
+    console.log(listOfQuizzes);
+    quizzListToAdd();
+}
+
+function quizzListToAdd () {
+    const quizzPlace = document.querySelector(".completeList").querySelector("ul");
+    quizzPlace.innerHTML = "";
+    for (let i=0;i<listOfQuizzes.length;i++){
+        quizzPlace.innerHTML += `
+            <li id="${listOfQuizzes[i].id}" class="quizz">
+                <div class="gradient-overlay">
+                    <img src="${listOfQuizzes[i].image}"
+                        alt="">
+                </div>
+                <div class="quizz-title">
+                    <span>${listOfQuizzes[i].title}</span>
+                </div>
+            </li>
+        `
+    }
 }
