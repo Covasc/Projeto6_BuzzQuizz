@@ -313,59 +313,6 @@ function createQuizzHandler() {
 
 //codes for quizz solving - verificando cada pergunta do quizz
 
-let numberQuestionsQuizzChosen = 0;
-let userLevel = 0;
-let idSolving = 0;
-
-let numbers = [1,12,15,22,18,75,64,89,33,54,5,12,84];
-numbers.sort((a,b) => a - b);
-console.log(numbers);
-
-function renderQuizzFinalization (userScore) {
-    console.log(userScore);
-    let levelsOfQuizz = listOfQuizzes[idSolving].levels;
-    let levelRange = []
-    let levelAchieved = 0;
-    for (let i=0;i<levelsOfQuizz.length;i++){
-        levelRange[i] = levelsOfQuizz[i].minValue
-    }
-    levelRange.sort((a,b) => a - b);
-    for (let i=0;i<levelRange.length;i++){
-        if (userScore>levelRange[i]){
-        } else {
-            levelAchieved = levelRange[i];
-        }
-    }
-    if (userScore == 100) {
-        levelAchieved = levelRange[levelRange.length-1];
-    }
-    for (let i=0;i<levelsOfQuizz.length;i++) {
-        if (levelsOfQuizz[i].minValue==levelAchieved){
-            let pontuation = Math.round(userScore);
-            document.querySelector(".content").innerHTML += `
-                <div class="question-area win-content">
-                    <li class="questions">
-                        <div>
-                            <span>Você marcou ${pontuation}%. ${levelsOfQuizz[i].title}</span>
-                        </div>
-                        <div class="answers">
-                            <div class="top-answer final-answer">
-                                <div class="correct">
-                                    <img src="${levelsOfQuizz[i].image}" alt="">
-                                </div>
-                                <div>
-                                    <span>${levelsOfQuizz[i].text}</span>
-                                </div>
-                            </div>                
-                        </div>
-                    </li> 
-                </div>    
-            `;
-            return;
-        }
-    }
-}
-
 function selectingOption (object) {
     const quizzSection = object.closest(".questions");
     if (quizzSection.classList.contains("done")){
@@ -385,11 +332,6 @@ function selectingOption (object) {
         if (object.classList.contains("correct")){
             score ++;
         }
-        let allDone = document.querySelectorAll(".content ul>div .done").length;
-        if (allDone == numberQuestionsQuizzChosen) {
-            userLevel = score/numberQuestionsQuizzChosen*100;
-            renderQuizzFinalization (userLevel);
-        }
     }
 }
 
@@ -407,14 +349,12 @@ function mountQuizzes (response) {
     quizzListToAdd();
 }
 
-//abrindo o quizz
-
 function quizzListToAdd () {
     const quizzPlace = document.querySelector(".completeList").querySelector("ul");
     quizzPlace.innerHTML = "";
     for (let i=0;i<listOfQuizzes.length;i++){
         quizzPlace.innerHTML += `
-            <li id="${listOfQuizzes[i].id}" class="quizz" onclick="solvingQuizz(${listOfQuizzes[i].id})">
+            <li id="${listOfQuizzes[i].id}" class="quizz">
                 <div class="gradient-overlay">
                     <img src="${listOfQuizzes[i].image}"
                         alt="">
@@ -428,104 +368,9 @@ function quizzListToAdd () {
 }
 
 function solvingQuizz (quizzId) {
-    score = 0;
     for (let i=0;i<listOfQuizzes.length;i++) {
         if (listOfQuizzes[i].id == quizzId) {
-            console.log(quizzId);
-            idSolving = i;
-            let quizzChosen = document.querySelector(".quizz-done")
-            quizzChosen.innerHTML = "";
-            quizzChosen.innerHTML = `
-            <div class="introduction">
-                <div class="gradient-overlay">
-                    <img src="${listOfQuizzes[i].image}" alt="imagem">
-                </div>
-                <div class="intro-name">
-                    <span>${listOfQuizzes[i].title}</span>
-                </div>
-            </div>
-            <div class="content">
-                <ul>
-                </ul>
-            </div>
-            `;
-            numberQuestionsQuizzChosen = listOfQuizzes[i].questions.length;
-            const renderQuestions = quizzChosen.querySelector("ul");
-            renderQuestions.innerHTML = "";
-            for (let j=0;j<listOfQuizzes[i].questions.length;j++) {
-                renderQuestions.innerHTML += `
-                    <div class="question-area">
-                        <li class="questions">
-                            <div>
-                                <span>${listOfQuizzes[i].questions[j].title}</span>
-                            </div>
-                            <div class="answers answers${j}">
-                            </div>
-                        </li> 
-                    </div>
-                `;
-                let renderAnswers = renderQuestions.querySelector(`.answers${j}`);
-                renderAnswers.innerHTML = "";
-                if (listOfQuizzes[i].questions[j].answers.length == 2) {
-                    renderAnswers.innerHTML += `
-                    <div class="top-answer">
-                        <div onclick="selectingOption(this)" class="correct">
-                            <img src="${listOfQuizzes[i].questions[j].answers[0].image}" alt="">
-                            <span>${listOfQuizzes[i].questions[j].answers[0].text}</span>
-                        </div>
-                        <div onclick="selectingOption(this)">
-                            <img src="${listOfQuizzes[i].questions[j].answers[1].image}" alt="">
-                            <span>${listOfQuizzes[i].questions[j].answers[1].text}</span>
-                        </div>
-                    </div>
-                `;
-                }
-                if (listOfQuizzes[i].questions[j].answers.length == 3) {
-                    renderAnswers.innerHTML += `
-                    <div class="top-answer">
-                        <div onclick="selectingOption(this)" class="correct">
-                            <img src="${listOfQuizzes[i].questions[j].answers[0].image}" alt="">
-                            <span>${listOfQuizzes[i].questions[j].answers[0].text}</span>
-                        </div>
-                        <div onclick="selectingOption(this)">
-                            <img src="${listOfQuizzes[i].questions[j].answers[1].image}" alt="">
-                            <span>${listOfQuizzes[i].questions[j].answers[1].text}</span>
-                        </div>
-                    </div>
-                    <div class="bottom-answer">
-                        <div onclick="selectingOption(this)">
-                            <img src="${listOfQuizzes[i].questions[j].answers[2].image}" alt="">
-                            <span>${listOfQuizzes[i].questions[j].answers[2].text}</span>
-                        </div>
-                    </div>
-                `;
-                }
-                if (listOfQuizzes[i].questions[j].answers.length == 4) {
-                    renderAnswers.innerHTML += `
-                    <div class="top-answer">
-                        <div onclick="selectingOption(this)" class="correct">
-                            <img src="${listOfQuizzes[i].questions[j].answers[0].image}" alt="">
-                            <span>${listOfQuizzes[i].questions[j].answers[0].text}</span>
-                        </div>
-                        <div onclick="selectingOption(this)">
-                            <img src="${listOfQuizzes[i].questions[j].answers[1].image}" alt="">
-                            <span>${listOfQuizzes[i].questions[j].answers[1].text}</span>
-                        </div>
-                    </div>
-                    <div class="bottom-answer">
-                        <div onclick="selectingOption(this)">
-                            <img src="${listOfQuizzes[i].questions[j].answers[2].image}" alt="">
-                            <span>${listOfQuizzes[i].questions[j].answers[2].text}</span>
-                        </div>
-                        <div onclick="selectingOption(this)">
-                            <img src="${listOfQuizzes[i].questions[j].answers[3].image}" alt="">
-                            <span>${listOfQuizzes[i].questions[j].answers[3].text}</span>
-                        </div>
-                    </div>
-                `;
-                }
-            }
+
         }
     }
-    screenChange('quizz-done');
 }

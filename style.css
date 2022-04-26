@@ -2,15 +2,17 @@
     box-sizing: border-box;
 }
 
-body{
+body {
     font-family: 'Roboto', sans-serif;
-    background-color: #FAFAFA;}
+    background-color: #FAFAFA;
+}
 
-strong,label{
+strong,
+label {
     font-weight: bold;
 }
 
-div.hidden{
+div.hidden {
     display: none;
 }
 
@@ -21,7 +23,7 @@ div.hidden{
     width: 100%;
 }
 
-.pages{
+.pages {
     width: 100%;
     position: relative;
     display: flex;
@@ -29,24 +31,26 @@ div.hidden{
     align-items: center;
 }
 
-.pages > div:nth-child(-n+2).active {
+.pages>div:nth-child(-n+2).active {
     margin: 139px 0 0 0;
     max-width: 1068px;
 }
-.pages > div:nth-child(3) {
+
+.pages>div:nth-child(3) {
     margin: 69px 0 0 0;
 }
 
-.page{
+.page {
     visibility: hidden;
-    top: 0; left: 0;
+    top: 0;
+    left: 0;
     opacity: 0;
     height: 0;
     margin: 0;
     transition: opacity 0.5s ease-in-out;
 }
 
-.page.active{
+.page.active {
     visibility: visible;
     width: 100%;
     opacity: 1;
@@ -71,7 +75,7 @@ div.hidden{
     z-index: 1;
 }
 
-.section-title{
+.section-title {
     margin-left: 8px;
     margin-bottom: 12px;
     font-weight: 700;
@@ -82,7 +86,7 @@ div.hidden{
 
 /* ADD BUTTONS */
 
-.add-button{
+.add-button {
     height: 30px;
     width: 30px;
     border-radius: 50%;
@@ -93,21 +97,21 @@ div.hidden{
     margin-left: 20px;
 }
 
-.add-button ion-icon{
+.add-button ion-icon {
     color: white;
     font-size: 26px;
 }
 
 /* List quizzes */
 
-.list-quizzes-container{
+.list-quizzes-container {
     width: 100%;
     display: flex;
     flex-direction: column;
     margin-bottom: 47px;
 }
 
-.section-title{
+.section-title {
     width: 100%;
     display: flex;
     justify-content: start;
@@ -119,14 +123,14 @@ div.hidden{
     flex-wrap: wrap;
 }
 
-.quizz{
+.quizz {
     margin-left: 8px;
     margin-right: 8px;
     margin-bottom: 12px;
     display: flex;
     width: 340px;
     height: 181px;
-    position: relative;  
+    position: relative;
 }
 
 .gradient-overlay {
@@ -134,15 +138,15 @@ div.hidden{
     position: relative;
 }
 
-.gradient-overlay::after{
-    border-radius: 5px;  
+.gradient-overlay::after {
+    border-radius: 5px;
     content: '';
     position: absolute;
     width: 100%;
     height: 100%;
-    top:0;
-    left:0;
-    background: linear-gradient(rgba(0, 0, 0, 0),rgba(0, 0, 0, 1));
+    top: 0;
+    left: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
 }
 
 .gradient-overlay img {
@@ -152,13 +156,13 @@ div.hidden{
     object-fit: cover;
 }
 
-.quizz-title{
+.quizz-title {
     width: 100%;
     height: 54px;
     position: absolute;
     bottom: 4px;
     display: flex;
-    align-items: center ;
+    align-items: center;
 }
 
 .quizz span {
@@ -182,7 +186,7 @@ div.hidden{
     margin-bottom: 77px;
 }
 
-.no-quizz span{
+.no-quizz span {
     width: 250px;
     font-size: 20px;
     color: #B9B9B9;
@@ -190,7 +194,7 @@ div.hidden{
     margin: 17px;
 }
 
-.no-quizz button{
+.no-quizz button {
     width: 136px;
     height: 40px;
     border: 1px dashed #EC362D;
@@ -210,7 +214,7 @@ div.hidden{
     transition-timing-function: ease-in-out;
 }
 
-.step.active{
+.step.active {
     opacity: 1;
     visibility: visible;
     height: auto;
@@ -218,20 +222,20 @@ div.hidden{
 
 /* CREATE QUIZZ FORM */
 
-.create-quizz-container > div{
+.create-quizz-container>div {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.create-quizz-container > div > span{
+.create-quizz-container>div>span {
     font-size: 23px;
     font-weight: bold;
     text-align: center;
     margin-bottom: 17px;
 }
 
-.form-container{
+.form-container {
     width: 600px;
     background-color: white;
     filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.05));
@@ -239,26 +243,26 @@ div.hidden{
 }
 
 .form-content {
-    padding:14px;
+    padding: 14px;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
 }
 
-.question-top{
+.question-top {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-.form-content label{
+.form-content label {
     width: 100%;
     font-size: 20px;
 }
 
-.form-container input{
+.form-container input {
     width: 100%;
     height: 46px;
     font-size: 19px;
@@ -267,18 +271,19 @@ div.hidden{
     padding: 0 15px;
 }
 
-.form-content label, .form-content input{
+.form-content label,
+.form-content input {
     margin: 7px 0;
 }
 
-.form-container input::placeholder{
+.form-container input::placeholder {
     font-style: italic;
     color: rgba(186, 186, 186, 1);
     font-size: 19px;
     line-height: 22px;
 }
 
-.step button{
+.step button {
     border: none;
     width: 368.86px;
     height: 54px;
@@ -295,7 +300,7 @@ div.hidden{
     transition: opacity 0.3s linear;
 }
 
-.form-container.active img{
+.form-container.active img {
     opacity: 0;
 }
 
@@ -306,6 +311,7 @@ div.hidden{
     flex-direction: column;
     align-items: center;
 }
+
 .introduction {
     width: 100%;
     height: 227px;
@@ -318,12 +324,14 @@ div.hidden{
     margin-bottom: 42px;
     overflow: hidden;
 }
+
 .intro-name {
     position: absolute;
     color: white;
     font-size: 39px;
     font-weight: 400;
 }
+
 .content {
     width: 759px;
     display: flex;
@@ -331,21 +339,25 @@ div.hidden{
     align-items: center;
     justify-content: center;
 }
+
 .question-area {
     padding: 30px;
     background-color: white;
     margin-bottom: 42px;
 }
+
 .content ul {
     width: 100%;
 }
+
 .questions {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-.questions > div:nth-child(1) {
+
+.questions>div:nth-child(1) {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -360,7 +372,8 @@ div.hidden{
     margin-bottom: 21px;
     overflow: hidden;
 }
-.questions > div:nth-child(2) {
+
+.questions>div:nth-child(2) {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -369,6 +382,7 @@ div.hidden{
     font-weight: 700;
     font-size: 20px;
 }
+
 .top-answer {
     width: 100%;
     display: flex;
@@ -376,44 +390,54 @@ div.hidden{
     justify-content: space-between;
     margin-bottom: 18px;
 }
-.top-answer > div {
+
+.top-answer>div {
     width: 329px;
     overflow: hidden;
 }
-.top-answer > div img {
+
+.top-answer>div img {
     width: 329px;
     height: 175px;
     object-fit: cover;
 }
+
 .bottom-answer {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.bottom-answer > div {
+
+.bottom-answer>div {
     width: 329px;
     overflow: hidden;
 }
-.bottom-answer > div img {
+
+.bottom-answer>div img {
     width: 329px;
     height: 175px;
     object-fit: cover;
 }
+
 .final-answer {
     align-items: initial;
 }
-.final-answer div{
+
+.final-answer div {
     display: flex;
     flex-wrap: wrap;
 }
+
 .top-answer.final-answer img {
     width: 365px;
     height: 274px;
 }
+
 .question-area.win-content {
     width: 100%;
 }
+
 .hide {
     display: none;
 }
@@ -423,7 +447,8 @@ div.hidden{
 }
 
 .green {
-    color: #009C22;;
+    color: #009C22;
+    ;
 }
 
 .red {
@@ -432,6 +457,15 @@ div.hidden{
 
 
 @media screen and (max-width: 1100px) {
-    
-}
+    .pages>div:nth-child(-n+2).active {
+        margin: 139px 0 0 0;
+        max-width: initial;
+    }
 
+    .list-quizzes ul {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+    }
+}
