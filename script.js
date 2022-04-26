@@ -14,6 +14,7 @@ let quizzToSend = {title:"",image:"",questions:[],levels:[]};
 let questionsToSend = {};
 let numberQuestions = 0;
 let numberLevels = 0;
+// ----
 
 getQuizzList();
 
@@ -24,7 +25,6 @@ const screenChange = screen => {
     stepTop.scrollIntoView({ block: "start", behavior: "smooth" });
 }
 
-//VERIFICAR A PARTIR DAQUI
 const nextStep = step => {
     qs('.step.active').classList.remove('active');
     document.getElementById(`${step}`).classList.add('active');
@@ -282,6 +282,13 @@ function verifyQuestionInput () {
     nextStep(next);
     createQuizzLevelInput(numberLevels);
 }
+const formValidation = (input) => {
+    if (input.value !== "") {
+        input.classList.remove("error");
+        return input.value;
+    }
+    input.classList.add("error");
+}
 
 function createQuizzHandler() {
     const activeStep = qs(".step.active");
@@ -357,5 +364,13 @@ function quizzListToAdd () {
                 </div>
             </li>
         `
+    }
+}
+
+function solvingQuizz (quizzId) {
+    for (let i=0;i<listOfQuizzes.length;i++) {
+        if (listOfQuizzes[i].id == quizzId) {
+
+        }
     }
 }
