@@ -315,6 +315,55 @@ function createQuizzHandler() {
 
 let numberQuestionsQuizzChosen = 0;
 let userLevel = 0;
+let idSolving = 0;
+
+let numbers = [1,12,15,22,18,75,64,89,33,54,5,12,84];
+numbers.sort((a,b) => a - b);
+console.log(numbers);
+
+function renderQuizzFinalization (userScore) {
+    console.log(userScore);
+    let levelsOfQuizz = listOfQuizzes[idSolving].levels;
+    let levelRange = []
+    let levelAchieved = 0;
+    for (let i=0;i<levelsOfQuizz.length;i++){
+        levelRange[i] = levelsOfQuizz[i].minValue
+    }
+    levelRange.sort((a,b) => a - b);
+    for (let i=0;i<levelRange.length;i++){
+        if (userScore>levelRange[i]){
+        } else {
+            levelAchieved = levelRange[i];
+        }
+    }
+    if (userScore == 100) {
+        levelAchieved = levelRange[levelRange.length-1];
+    }
+    for (let i=0;i<levelsOfQuizz.length;i++) {
+        if (levelsOfQuizz[i].minValue==levelAchieved){
+            document.querySelector(".content").innerHTML += `
+                <div class="question-area win-content">
+                    <li class="questions">
+                        <div>
+                            <span>Você marcou ${levelAchieved}%. ${levelsOfQuizz[i].title}</span>
+                        </div>
+                        <div class="answers">
+                            <div class="top-answer final-answer">
+                                <div class="correct">
+                                    <img src="${levelsOfQuizz[i].image}" alt="">
+                                </div>
+                                <div>
+                                    <span>${levelsOfQuizz[i].text}</span>
+                                </div>
+                            </div>                
+                        </div>
+                    </li> 
+                </div>    
+            `;
+            return;
+        }
+    }
+}
 
 function selectingOption (object) {
     const quizzSection = object.closest(".questions");
@@ -338,6 +387,7 @@ function selectingOption (object) {
         let allDone = document.querySelectorAll(".content ul>div .done").length;
         if (allDone == numberQuestionsQuizzChosen) {
             userLevel = score/numberQuestionsQuizzChosen*100;
+            renderQuizzFinalization (userLevel);
         }
     }
 }
@@ -381,6 +431,7 @@ function solvingQuizz (quizzId) {
     for (let i=0;i<listOfQuizzes.length;i++) {
         if (listOfQuizzes[i].id == quizzId) {
             console.log(quizzId);
+            idSolving = i;
             let quizzChosen = document.querySelector(".quizz-done")
             quizzChosen.innerHTML = "";
             quizzChosen.innerHTML = `

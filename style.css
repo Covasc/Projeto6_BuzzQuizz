@@ -400,7 +400,20 @@ div.hidden{
     height: 175px;
     object-fit: cover;
 }
-
+.final-answer {
+    align-items: initial;
+}
+.final-answer div{
+    display: flex;
+    flex-wrap: wrap;
+}
+.top-answer.final-answer img {
+    width: 365px;
+    height: 274px;
+}
+.question-area.win-content {
+    width: 100%;
+}
 .hide {
     display: none;
 }
