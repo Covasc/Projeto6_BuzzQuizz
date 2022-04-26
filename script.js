@@ -341,11 +341,12 @@ function renderQuizzFinalization (userScore) {
     }
     for (let i=0;i<levelsOfQuizz.length;i++) {
         if (levelsOfQuizz[i].minValue==levelAchieved){
+            let pontuation = Math.round(userScore);
             document.querySelector(".content").innerHTML += `
                 <div class="question-area win-content">
                     <li class="questions">
                         <div>
-                            <span>Você marcou ${levelAchieved}%. ${levelsOfQuizz[i].title}</span>
+                            <span>Você marcou ${pontuation}%. ${levelsOfQuizz[i].title}</span>
                         </div>
                         <div class="answers">
                             <div class="top-answer final-answer">
