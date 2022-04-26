@@ -56,7 +56,6 @@
                                     <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem </span>
                                 </div>
                             </li>
-
                         </ul>
                     </div>
                 </div>
@@ -64,47 +63,8 @@
                     <div class="section-title">
                         <span>Todos os Quizzes</span>
                     </div>
-                    <div class="list-quizzes">
+                    <div class="list-quizzes completeList">
                         <ul>
-                            <li class="quizz">
-                                <div class="gradient-overlay">
-                                    <img src="https://upload.wikimedia.org/wikipedia/pt/7/74/Dragon_Ball_Super_Key_visual.jpg"
-                                        alt="">
-                                </div>
-                                <div class="quizz-title">
-                                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem </span>
-                                </div>
-
-                            </li>
-                            
-                            <li class="quizz">
-                                <div class="gradient-overlay">
-                                    <img src="https://upload.wikimedia.org/wikipedia/pt/7/74/Dragon_Ball_Super_Key_visual.jpg"
-                                        alt="">
-                                </div>
-                                <div class="quizz-title">
-                                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem </span>
-                                </div>
-
-                            </li>
-                            <li class="quizz">
-                                <div class="gradient-overlay">
-                                    <img src="https://upload.wikimedia.org/wikipedia/pt/7/74/Dragon_Ball_Super_Key_visual.jpg"
-                                        alt="">
-                                </div>
-                                <div class="quizz-title">
-                                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem </span>
-                                </div>
-                            </li>
-                            <li class="quizz">
-                                <div class="gradient-overlay">
-                                    <img src="https://upload.wikimedia.org/wikipedia/pt/7/74/Dragon_Ball_Super_Key_visual.jpg"
-                                        alt="">
-                                </div>
-                                <div class="quizz-title">
-                                    <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem </span>
-                                </div>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -121,72 +81,31 @@
                                 <input type="text" placeholder="Quantidade de níveis do quizz">
                             </div>
                         </div>
-                        <button type="button"  onclick="createQuizzHandler()">Prosseguir pra criar perguntas</button>
+                        <button type="button" onclick="createQuizzHandler()">Prosseguir pra criar perguntas</button>
                     </div>
                     <div id="2" class="step">
                         <span>Crie suas perguntas</span>
                         <div class="addhere">
-                            <!-- <div class="form-container">
-                                <div class="form-content">
-                                    <div class="question-top">
-                                        <label for="question">Pergunta 1</label>
-                                        <img src="./Images/edit-icon.svg" alt="">
-                                    </div>
-                                    <input type="text" placeholder="Texto da pergunta">
-                                    <input type="text" placeholder="Cor de fundo da pergunta">
-                                    <label for="question">Resposta correta</label>
-                                    <input type="text" placeholder="Resposta correta">
-                                    <input type="text" placeholder="URL da imagem">
-                                    <label for="question">Respostas incorretas</label>
-                                    <input type="text" placeholder="Resposta incorreta 1">
-                                    <input type="text" placeholder="URL da imagem 1">
-                                    <input type="text" placeholder="Resposta incorreta 2">
-                                    <input type="text" placeholder="URL da imagem 2">
-                                    <input type="text" placeholder="Resposta incorreta 3">
-                                    <input type="text" placeholder="URL da imagem 3">
-                                </div>
-                            </div>
-                            <div class="form-container">
-                                <div class="form-content">
-                                    <div class="question-top">
-                                        <label for="question">Pergunta 2</label>
-                                        <img src="./Images/edit-icon.svg" alt="">
-                                    </div>
-                                    
-                                </div>
-                            </div>                         -->
                         </div>
-                        <button type="button" onclick="nextStep(3)">Prosseguir pra criar perguntas</button>
+                        <button type="button" onclick="verifyQuestionInput()">Prosseguir pra criar níveis</button>
                     </div>
                     <div id="3" class="step">
                         <span>Agora, decida os níveis</span>
-                        <div class="form-container">
-                            <div class="form-content">
-                                <div class="question-top">
-                                    <label for="question">Nível 1</label>
-                                    <img src="./Images/edit-icon.svg" alt="">
-                                </div>
-                                <input type="text" placeholder="Título do nível">
-                                <input type="text" placeholder="% de acerto mínima">
-                                <input type="text" placeholder="URL da imagem do nível">
-                                <input type="text" placeholder="Descrição do nível">
-                            </div>
+                        <div class="addLevelsHere">
                         </div>
-                        <div class="form-container">
-                            <div class="form-content">
-                                <div class="question-top">
-                                    <label for="question">Nível 2</label>
-                                    <img src="./Images/edit-icon.svg" alt="">
-                                </div>
-                            </div>
-                        </div>
-                        <button type="button" onclick="nextStep(4)">Prosseguir pra criar perguntas</button>
+                        <button type="button" onclick="verifyLevelInput()">Finalizar Quizz</button>
+                    </div>
+                    <div id="4" class="step">
+                        <span>Seu Quizz está pronto!</span>
+                        <button type="button" onclick='screenChange("home")'>Acessar Quizz</button>
                     </div>
                 </div>
-
             </div>
             <div class="page quizz-done ">
                 <div class="introduction">
+                    <div class="gradient-overlay">
+                        <img src="images/imagem-teste.jpg" alt="imagem">
+                    </div>
                     <div class="intro-name">
                         <span>O quão Potterhead é você?</span>
                     </div>
@@ -198,120 +117,116 @@
                                 <div>
                                     <span>Em qual animal Olho-Tonto Moody transfigurou Malfoy?</span>
                                 </div>
-                                <div>
+                                <div class="answers">
                                     <div class="top-answer">
-                                        <div>
+                                        <div onclick="selectingOption(this)" class="correct">
                                             <img src="Images/imagem-teste.jpg" alt="">
                                             <span>Gatíneo</span>
                                         </div>
-                                        <div>
+                                        <div onclick="selectingOption(this)">
                                             <img src="Images/imagem-teste.jpg" alt="">
                                             <span>Ratatá</span>
                                         </div>
                                     </div>
                                     <div class="bottom-answer">
-                                        <div>
+                                        <div onclick="selectingOption(this)">
                                             <img src="Images/imagem-teste.jpg" alt="">
                                             <span>Sapo Cururú</span>
                                         </div>
-                                        <div>
+                                        <div onclick="selectingOption(this)">
                                             <img src="Images/imagem-teste.jpg" alt="">
                                             <span>Mustela putorius (o Furão)</span>
                                         </div>
-
                                     </div>
                                 </div>
-                            </li>
+                            </li> 
                         </div>
                         <div class="question-area">
                             <li class="questions">
                                 <div>
                                     <span>Em qual animal Olho-Tonto Moody transfigurou Malfoy?</span>
                                 </div>
-                                <div>
+                                <div class="answers">
                                     <div class="top-answer">
-                                        <div>
+                                        <div onclick="selectingOption(this)" class="correct">
                                             <img src="Images/imagem-teste.jpg" alt="">
                                             <span>Gatíneo</span>
                                         </div>
-                                        <div>
+                                        <div onclick="selectingOption(this)">
                                             <img src="Images/imagem-teste.jpg" alt="">
                                             <span>Ratatá</span>
                                         </div>
                                     </div>
                                     <div class="bottom-answer">
-                                        <div>
+                                        <div onclick="selectingOption(this)">
                                             <img src="Images/imagem-teste.jpg" alt="">
                                             <span>Sapo Cururú</span>
                                         </div>
-                                        <div>
+                                        <div onclick="selectingOption(this)">
                                             <img src="Images/imagem-teste.jpg" alt="">
                                             <span>Mustela putorius (o Furão)</span>
                                         </div>
-
                                     </div>
                                 </div>
-                            </li>
+                            </li> 
                         </div>
                         <div class="question-area">
                             <li class="questions">
                                 <div>
                                     <span>Em qual animal Olho-Tonto Moody transfigurou Malfoy?</span>
                                 </div>
-                                <div>
+                                <div class="answers">
                                     <div class="top-answer">
-                                        <div>
+                                        <div onclick="selectingOption(this)" class="correct">
                                             <img src="Images/imagem-teste.jpg" alt="">
                                             <span>Gatíneo</span>
                                         </div>
-                                        <div>
+                                        <div onclick="selectingOption(this)">
                                             <img src="Images/imagem-teste.jpg" alt="">
                                             <span>Ratatá</span>
                                         </div>
                                     </div>
                                     <div class="bottom-answer">
-                                        <div>
+                                        <div onclick="selectingOption(this)">
                                             <img src="Images/imagem-teste.jpg" alt="">
                                             <span>Sapo Cururú</span>
                                         </div>
-                                        <div>
+                                        <div onclick="selectingOption(this)">
                                             <img src="Images/imagem-teste.jpg" alt="">
                                             <span>Mustela putorius (o Furão)</span>
                                         </div>
-
                                     </div>
                                 </div>
-                            </li>
+                            </li> 
                         </div>
                         <div class="question-area">
                             <li class="questions">
                                 <div>
                                     <span>Em qual animal Olho-Tonto Moody transfigurou Malfoy?</span>
                                 </div>
-                                <div>
+                                <div class="answers">
                                     <div class="top-answer">
-                                        <div>
+                                        <div onclick="selectingOption(this)" class="correct">
                                             <img src="Images/imagem-teste.jpg" alt="">
                                             <span>Gatíneo</span>
                                         </div>
-                                        <div>
+                                        <div onclick="selectingOption(this)">
                                             <img src="Images/imagem-teste.jpg" alt="">
                                             <span>Ratatá</span>
                                         </div>
                                     </div>
                                     <div class="bottom-answer">
-                                        <div>
+                                        <div onclick="selectingOption(this)">
                                             <img src="Images/imagem-teste.jpg" alt="">
                                             <span>Sapo Cururú</span>
                                         </div>
-                                        <div>
+                                        <div onclick="selectingOption(this)">
                                             <img src="Images/imagem-teste.jpg" alt="">
                                             <span>Mustela putorius (o Furão)</span>
                                         </div>
-
                                     </div>
                                 </div>
-                            </li>
+                            </li> 
                         </div>
                     </ul>
                 </div>
@@ -326,3 +241,14 @@
 </body>
 
 </html>
+
+<!-- <li class="quizz">
+    <div class="gradient-overlay">
+        <img src="https://upload.wikimedia.org/wikipedia/pt/7/74/Dragon_Ball_Super_Key_visual.jpg"
+            alt="">
+    </div>
+    <div class="quizz-title">
+        <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem </span>
+    </div>
+</li> -->
+
