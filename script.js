@@ -27,41 +27,36 @@ const getQuizzes = () => axios.get(API + "/quizzes");
 
 const isURL = (url) => url.includes('http');
 
-
-
-
-function checkBasicData(input){
+function checkBasicData(input) {
     const charQty = input.value.length;
-    
-    if (input.name === "quizz-title"){
+
+    if (input.name === "quizz-title") {
         if (charQty < 20 || charQty > 65)
             return false;
         return true;
     }
-    if (input.name === "qty-questions"){
+    if (input.name === "qty-questions") {
         if (Number(input.value) < 3)
             return false;
         return true;
     }
-    if (input.name === "qty-levels"){
+    if (input.name === "qty-levels") {
         if (Number(input.value) < 2)
             return false;
         return true;
     }
-    return isURL(input.value);  
+    return isURL(input.value);
 }
 
-
-
-function checkQuestionData(input){
+function checkQuestionData(input) {
     const charQty = input.value.length;
     let isHex = /^#[0-9a-f]{3}(?:[0-9a-f]{3})?$/i;
-    if(input.name === "question-text"){
-        if(charQty < 20)
+    if (input.name === "question-text") {
+        if (charQty < 20)
             return false;
         return true;
     }
-    if(input.name === "question-color"){
+    if (input.name === "question-color") {
         return isHex.test(input.value);
     }
     return isURL(input.value);
@@ -70,33 +65,37 @@ function checkQuestionData(input){
 const formValidation = (input) => {
     const parentId = input.parentElement.parentElement.parentElement.id;
     let isValid = false;
+
     if (input.value !== "") {
         input.classList.remove("error");
-        if(parentId === "1"){
+        if (parentId === "1") {
             isValid = checkBasicData(input);
         }
-        if (parentId === "2"){
+        if (parentId === "2") {
             isValid = checkQuestionData(input);
         }
-        if (parentId === "3"){
+        if (parentId === "3") {
             isValid = checkLevelData(input)
         }
-        if(isValid){
+        if (isValid) {
             return input.value;
-        }       
+        }
+    }
+    if (input.name === "answer") {
+        return {answer: input.value};
     }
     input.classList.add("error");
 }
 
-function isEmpty(arr){
+function isEmpty(arr) {
     return arr.every(element => element);
 }
 
-function createQuizzQuestionsInput (numberInput) {
+function createQuizzQuestionsInput(numberInput) {
     inputQuizzData = document.querySelector(".addhere");
     inputQuizzData.innerHTML = "";
-    for (let i=0;i<numberInput;i++){
-        let questionNumber = i+1;
+    for (let i = 0; i < numberInput; i++) {
+        let questionNumber = i + 1;
         inputQuizzData.innerHTML += `
         <div onclick="openQuestionInput(this)" class="form-container questionNumber${questionNumber}">
             <div class="form-content">
@@ -122,18 +121,18 @@ function createQuizzQuestionsInput (numberInput) {
         </div>
         `;
     }
-    openQuestionInput (document.querySelector(".questionNumber1"));
+    openQuestionInput(document.querySelector(".questionNumber1"));
     console.log("foi");
 }
 
-function openQuestionInput (object) {
+function openQuestionInput(object) {
     let allTextAreas = document.querySelectorAll(".textAreaInput");
-    for (let i=0;i<allTextAreas.length;i++){
+    for (let i = 0; i < allTextAreas.length; i++) {
         allTextAreas[i].classList.add("hide");
     }
     let textAreaInput = object.querySelector(".textAreaInput");
     textAreaInput.classList.remove("hide");
-    object.querySelector(".question-top").scrollIntoView({ block: "center" , behavior: "smooth" });
+    object.querySelector(".question-top").scrollIntoView({ block: "center", behavior: "smooth" });
 }
 
 function createQuizzHandler() {
